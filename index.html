@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+</head>
+<body onload="myFunction()">
+    <h1 style="margin-top: 0;"><a href="#" style="color: white;">Movie Deck</a></h1>
+    <div id="search">
+        <input type="search" autocomplete="off" placeholder="Search by name..."/>
+        <button type="submit" class="search" onclick="searchByName(event)"  >Search</button>
+    </div>
+    <div id="sort">
+        <button type="submit" id="sortBydate">
+            Sort by date (oldest to latest)
+        </button>
+        <button type="submit" id="sortByrate">
+            Sort by rating (least to most)
+        </button>
 
+    </div>
+    <div id="tab">
+        <button class="active-tab">All</button>
+        <button class="fav">Favorites</button>
+    </div>
+    <div id="movieList">
+        
+        </ul>
+               
+        <ul id="pagination">
+            <li><button>Previous</button></li>
+                <li><button>Current Page: 1</button></li>
+                <li><button>Next</button>
+            </li>
+        </ul>
+    </div> 
+    <footer>
+        <p>© 2023 Movie Deck</p>
+    </footer>
+    <script src="App.js"></script>
+</body>
+</html>
