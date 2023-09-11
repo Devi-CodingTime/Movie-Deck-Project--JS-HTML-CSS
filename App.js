@@ -39,6 +39,8 @@ function sortByrating()
 
 async function searchByName()
 {
+    var userInput = document.querySelector("#search input").value;
+
     console.log(user);
     user.filter((value)=>{
         return value.title==userInput;
