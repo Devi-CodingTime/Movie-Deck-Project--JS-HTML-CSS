@@ -1,22 +1,23 @@
 async function myFunction()
 {
-    let res = await fetch('https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies');
+    let res = await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=f531333d637d0c44abc85b3e74db2186&language=en-US&page=1');
     let response = await res.json();
-    let div = document.getElementById("movieList");
-    let ul = document.createElement("ul");
-    response.map((val,i)=>{
-        let li = document.createElement("li");
-        li.innerHTML= `
-            <img src="${val.Poster}" style="object-fit: cover;
-            height:410px ;
-            width: 345px;"/>
-            <h3>${val.Title}</h3>
-            <div>Vote:${i}</div>
-            <span><i class="fa-light fa-heart"></i></span>
-            <div>Rating: ${i+2}</div>`
-        ul.appendChild(li);
-    });
-    div.appendChild(ul);
+    console.log(response);
+    // let div = document.getElementById("movieList");
+    // let ul = document.createElement("ul");
+    // response.map((val,i)=>{
+    //     let li = document.createElement("li");
+    //     li.innerHTML= `
+    //         <img src="${val.Poster}" style="object-fit: cover;
+    //         height:410px ;
+    //         width: 345px;"/>
+    //         <h3>${val.Title}</h3>
+    //         <div>Vote:${i}</div>
+    //         <span><i class="fa-light fa-heart"></i></span>
+    //         <div>Rating: ${i+2}</div>`
+    //     ul.appendChild(li);
+    // });
+    // div.appendChild(ul);
 }
 function sortbydate()
 {
@@ -28,7 +29,7 @@ function sortbydate()
       console.log("after sorting"+array);
 }
 
-sortbydate();
+// sortbydate();
 
 function sortByrating()
 {
