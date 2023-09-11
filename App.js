@@ -41,11 +41,14 @@ async function searchByName()
 {
     var userInput = document.querySelector("#search input").value;
 
-    console.log(user);
-    user.filter((value)=>{
-        return value.title==userInput;
-    });
-    console.log(user);
+    console.log(userInput);
+    user.forEach((p)=>{
+        console.log(p.title);
+    })
+    // user.filter((value)=>{
+    //     return value.title==userInput/;
+    // });
+    // console.log(user);
 
     
     // alert(userInput);
