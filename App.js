@@ -41,16 +41,25 @@ async function searchByName()
 {
     var userInput = document.querySelector("#search input").value;
 
-    console.log(userInput);
-    user.forEach((p)=>{
-        console.log(p.title);
-    })
-    // user.filter((value)=>{
-    //     return value.title==userInput/;
-    // });
-    // console.log(user);
+   let name = user.filter((value)=>{
+        return value.title==userInput;
+    });
+    console.log(name);
 
-    
-    // alert(userInput);
+    let div = document.getElementById("movieList");
+    let ul = document.createElement("ul");
+    name.map((val,i)=>{
+        let li = document.createElement("li");
+        li.innerHTML= `
+            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
+            height:410px ;
+            width: 345px;"/>
+            <h3>${val.title}</h3>
+            <div>Vote:${val.vote_count}</div>
+            <span><i class="fa-light fa-heart"></i></span>
+            <div>Rating: ${val.vote_average}</div>`
+        ul.appendChild(li);
+    });
+    div.appendChild(ul);
   
 }
