@@ -45,7 +45,10 @@ async function searchByName()
         return value.title==userInput;
     });
     console.log(name);
-
+    console.log(name.title);
+    console.log(name.vote_average);
+    console.log(name.vote_count);
+    console.log(name.poster_path);
     let div = document.getElementById("movieList");
     let ul = document.createElement("ul");
     name.map((val,i)=>{
