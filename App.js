@@ -1,10 +1,12 @@
 let user;
+let favourite=[];
+let div = document.getElementById("movieList");
 async function myFunction()
 {
     let res = await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=f531333d637d0c44abc85b3e74db2186&language=en-US&page=1');
     let response = await res.json();
     user = response.results;
-    let div = document.getElementById("movieList");
+   
     let ul = document.createElement("ul");
     user.map((val,i)=>{
         let li = document.createElement("li");
@@ -12,29 +14,60 @@ async function myFunction()
             <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
             height:410px ;
             width: 345px;"/>
-            <h3>${val.title}</h3>
-            <div>Vote:${val.vote_count}</div>
-            <span><i class="fa-light fa-heart"></i></span>
-            <div>Rating: ${val.vote_average}</div>`
+            <h3 style="line-height: 30px;">${val.title}</h3>
+            <div id="vote">Vote:${val.vote_count}</div>
+            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
+            <div>Rating: ${val.vote_average}</div>
+            <div>Date: ${val.release_date}</div>`
         ul.appendChild(li);
     });
     div.appendChild(ul);
 }
 function sortbydate()
 {
-    var array = [{ date: "Mar 12 2022 10:00:00 AM"}, { date: "Mar 8 2012 08:00:00 AM"}, { date: "Sept 12 2014 1:09:00 PM"}, { date: "Aug 8 2012 08:00:00 AM"},{ date: "May 1 2019 1:11:00 PM"}];
-    console.log("before sorting"+array);
-    array.sort(function(a,b){
-        return new Date(b.date) - new Date(a.date);
+    user.sort(function(a,b){
+        return new Date(a.release_date) - new Date(b.release_date);
       });
-      console.log("after sorting"+array);
+      let ul = document.createElement("ul");
+      user.map((val,i)=>{
+        let li = document.createElement("li");
+        li.innerHTML= `
+            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
+            height:410px ;
+            width: 345px;"/>
+            <h3 style="line-height: 30px;">${val.title}</h3>
+            <div id="vote">Vote:${val.vote_count}</div>
+            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
+            <div>Rating: ${val.vote_average}</div>
+            <div>Date: ${val.release_date}</div>`
+        ul.appendChild(li);
+    });
+    div.appendChild(ul);
+
 }
 
 // sortbydate();
 
 function sortByrating()
 {
-//  do sorting here
+    user.sort(function(a,b){
+        return a.vote_average - b.vote_average;
+      });
+      let ul = document.createElement("ul");
+      user.map((val,i)=>{
+        let li = document.createElement("li");
+        li.innerHTML= `
+            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
+            height:410px ;
+            width: 345px;"/>
+            <h3 style="line-height: 30px;">${val.title}</h3>
+            <div id="vote">Vote:${val.vote_count}</div>
+            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
+            <div>Rating: ${val.vote_average}</div>
+            <div>Date: ${val.release_date}</div>`
+        ul.appendChild(li);
+    });
+    div.appendChild(ul);
 }
 
 async function searchByName()
@@ -49,7 +82,7 @@ async function searchByName()
     console.log(name.vote_average);
     console.log(name.vote_count);
     console.log(name.poster_path);
-    let div = document.getElementById("movieList");
+
     let ul = document.createElement("ul");
     name.map((val,i)=>{
         let li = document.createElement("li");
@@ -57,12 +90,64 @@ async function searchByName()
             <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
             height:410px ;
             width: 345px;"/>
-            <h3>${val.title}</h3>
-            <div>Vote:${val.vote_count}</div>
-            <span><i class="fa-light fa-heart"></i></span>
+            <h3 style="line-height: 30px;">${val.title}</h3>
+            <div id="vote">Vote:${val.vote_count}</div>
+            <span><i class="icon-heart-empty" onclick="addFavourite(event)"></i></span>
             <div>Rating: ${val.vote_average}</div>`
         ul.appendChild(li);
     });
     div.appendChild(ul);
   
 }
+
+function addFavourite(id)
+{
+    console.log(id);
+    
+    let heart = document.querySelector(".icon-heart-empty");
+    heart.style.color = "red";
+    let arr;
+    arr = user.filter(element => {
+        return element.id==id;
+    });
+    favourite.push(arr);
+    // console.log(favourite);
+}
+
+function showfav()
+{
+    console.log(favourite);
+    alert("i am favorite");
+    let ul = document.createElement("ul");
+    favourite?.favourite.map((val,i)=>{
+        let li = document.createElement("li");
+        li.innerHTML= `
+            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
+            height:410px ;
+            width: 345px;"/>
+            <h3 style="line-height: 30px;">${val.title}</h3>
+            <div id="vote">Vote:${val.vote_count}</div>
+            <span><i class="icon-heart-empty" onclick="addFavourite(event)"></i></span>
+            <div>Rating: ${val.vote_average}</div>`
+        ul.appendChild(li);
+    });
+    div.appendChild(ul);
+}
+// function displayMovieList(movieArray)
+// {
+//     let ul = document.createElement("ul");
+//     movieArray?.movieArray.map((val,i)=>{
+//         let li = document.createElement("li");
+//         li.innerHTML= `
+//             <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
+//             height:410px ;
+//             width: 345px;"/>
+//             <h3 style="line-height: 30px;">${val.title}</h3>
+//             <div id="vote">Vote:${val.vote_count}</div>
+//             <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
+//             <div>Rating: ${val.vote_average}</div>
+//             <div>Date: ${val.release_date}</div>`
+//         ul.appendChild(li);
+//     });
+//     div.appendChild(ul);
+// }
