@@ -31,10 +31,9 @@
        
     </div> 
     <ul id="pagination">
-        <li><button>Previous</button></li>
-            <li><button>Current Page: 1</button></li>
-            <li><button>Next</button>
-        </li>
+        <li><button id="prev" disabled onclick="prevButton()">Previous</button></li>
+        <li><button id="curr" onclick="currButton()">1</button></li>
+        <li><button id="next" onclick="nextButton()">Next</button></li>
     </ul>
     <footer>
         <p>© 2023 Movie Deck</p>

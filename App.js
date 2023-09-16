@@ -1,9 +1,16 @@
 let user;
 let favourite=[];
 let div = document.getElementById("movieList");
+let currpage = parseInt(document.getElementById("curr").innerText);
+let nextPage = document.getElementById("next");
+let prevPage = document.getElementById("prev");
+let currentPage = document.getElementById("curr");
+
+console.log(currpage+1);
 async function myFunction()
 {
-    let res = await fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=f531333d637d0c44abc85b3e74db2186&language=en-US&page=1');
+    currentPage.textContent = `Current Page: ${currpage}`;
+    let res = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=f531333d637d0c44abc85b3e74db2186&language=en-US&page=${currpage}`);
     let response = await res.json();
     user = response.results;
    
@@ -28,6 +35,8 @@ function sortbydate()
     user.sort(function(a,b){
         return new Date(a.release_date) - new Date(b.release_date);
       });
+      console.log(user);
+      div.innerHTML = "";
       let ul = document.createElement("ul");
       user.map((val,i)=>{
         let li = document.createElement("li");
@@ -53,6 +62,7 @@ function sortByrating()
     user.sort(function(a,b){
         return a.vote_average - b.vote_average;
       });
+      div.innerHTML = "";
       let ul = document.createElement("ul");
       user.map((val,i)=>{
         let li = document.createElement("li");
@@ -77,12 +87,7 @@ async function searchByName()
    let name = user.filter((value)=>{
         return value.title==userInput;
     });
-    console.log(name);
-    console.log(name.title);
-    console.log(name.vote_average);
-    console.log(name.vote_count);
-    console.log(name.poster_path);
-
+    div.innerHTML = "";
     let ul = document.createElement("ul");
     name.map((val,i)=>{
         let li = document.createElement("li");
@@ -104,20 +109,22 @@ function addFavourite(id)
 {
     console.log(id);
     
-    let heart = document.querySelector(".icon-heart-empty");
-    heart.style.color = "red";
-    let arr;
-    arr = user.filter(element => {
+    let favElement;
+    favElement = user.filter(element => {
         return element.id==id;
     });
-    favourite.push(arr);
+
+        let heart = document.querySelector(".icon-heart-empty");
+        heart.style.fill = "red";
+
+    favourite.push(favElement);
     // console.log(favourite);
 }
 
 function showfav()
 {
     console.log(favourite);
-    alert("i am favorite");
+    div.innerHTML = "";
     let ul = document.createElement("ul");
     favourite?.favourite.map((val,i)=>{
         let li = document.createElement("li");
@@ -132,6 +139,31 @@ function showfav()
         ul.appendChild(li);
     });
     div.appendChild(ul);
+}
+
+function prevButton()
+{
+    currpage--;
+    currentPage.textContent = `Current Page: ${currpage}`;
+    div.innerHTML = "";
+    myFunction();
+    if(currpage==1)
+    {
+        nextPage.disabled=false;
+        prevPage.disabled = true;
+    }
+}
+function nextButton()
+{
+    currpage++;
+    currentPage.textContent = `Current Page: ${currpage}`;
+    div.innerHTML = "";
+    myFunction();
+    if(currpage==3)
+    {
+        nextPage.disabled=true;
+        prevPage.disabled = false;
+    }
 }
 // function displayMovieList(movieArray)
 // {
