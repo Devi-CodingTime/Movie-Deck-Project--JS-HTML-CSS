@@ -77,6 +77,21 @@ function sortByrating()
             <div>Date: ${val.release_date}</div>`
         ul.appendChild(li);
     });
+
+    // user.map(function(val,i){
+    //     console.log(this);
+    //     let li = document.createElement("li");
+    //     li.innerHTML= `
+    //         <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
+    //         height:410px ;
+    //         width: 345px;"/>
+    //         <h3 style="line-height: 30px;">${val.title}</h3>
+    //         <div id="vote">Vote:${val.vote_count}</div>
+    //         <span><i class="icon-heart-empty" onclick=${addFavourite.call(this,val.id)}></i></span>
+    //         <div>Rating: ${val.vote_average}</div>
+    //         <div>Date: ${val.release_date}</div>`
+    //     ul.appendChild(li);
+    // });
     div.appendChild(ul);
 }
 
@@ -85,7 +100,7 @@ async function searchByName()
     var userInput = document.querySelector("#search input").value;
 
    let name = user.filter((value)=>{
-        return value.title==userInput;
+        return value.title.toUpperCase().includes(userInput.toUpperCase());
     });
     div.innerHTML = "";
     let ul = document.createElement("ul");
@@ -97,7 +112,7 @@ async function searchByName()
             width: 345px;"/>
             <h3 style="line-height: 30px;">${val.title}</h3>
             <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(event)"></i></span>
+            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
             <div>Rating: ${val.vote_average}</div>`
         ul.appendChild(li);
     });
@@ -107,7 +122,9 @@ async function searchByName()
 
 function addFavourite(id)
 {
-    console.log(id);
+    // alert("heool")
+    // console.log(this);
+    // this.style.color = "red";
     
     let favElement;
     favElement = user.filter(element => {
@@ -117,7 +134,9 @@ function addFavourite(id)
         let heart = document.querySelector(".icon-heart-empty");
         heart.style.fill = "red";
 
-    favourite.push(favElement);
+    const [A] = favElement; 
+        // console.log(A);
+    favourite.push(A);
     // console.log(favourite);
 }
 
@@ -126,7 +145,7 @@ function showfav()
     console.log(favourite);
     div.innerHTML = "";
     let ul = document.createElement("ul");
-    favourite?.favourite.map((val,i)=>{
+    favourite.length && favourite.map((val,i)=>{
         let li = document.createElement("li");
         li.innerHTML= `
             <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
@@ -134,7 +153,7 @@ function showfav()
             width: 345px;"/>
             <h3 style="line-height: 30px;">${val.title}</h3>
             <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(event)"></i></span>
+            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
             <div>Rating: ${val.vote_average}</div>`
         ul.appendChild(li);
     });
