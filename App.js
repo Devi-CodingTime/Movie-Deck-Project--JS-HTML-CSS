@@ -6,7 +6,6 @@ let nextPage = document.getElementById("next");
 let prevPage = document.getElementById("prev");
 let currentPage = document.getElementById("curr");
 
-console.log(currpage+1);
 async function myFunction()
 {
     currentPage.textContent = `Current Page: ${currpage}`;
@@ -16,6 +15,7 @@ async function myFunction()
    
     let ul = document.createElement("ul");
     user.map((val,i)=>{
+        // console.log("Hello : ",i)
         let li = document.createElement("li");
         li.innerHTML= `
             <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
@@ -23,7 +23,7 @@ async function myFunction()
             width: 345px;"/>
             <h3 style="line-height: 30px;">${val.title}</h3>
             <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
+            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id},${i})"></i></span>
             <div>Rating: ${val.vote_average}</div>
             <div>Date: ${val.release_date}</div>`
         ul.appendChild(li);
@@ -46,7 +46,7 @@ function sortbydate()
             width: 345px;"/>
             <h3 style="line-height: 30px;">${val.title}</h3>
             <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
+            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id},${i})"></i></span>
             <div>Rating: ${val.vote_average}</div>
             <div>Date: ${val.release_date}</div>`
         ul.appendChild(li);
@@ -72,26 +72,12 @@ function sortByrating()
             width: 345px;"/>
             <h3 style="line-height: 30px;">${val.title}</h3>
             <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
+            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id},${i})"></i></span>
             <div>Rating: ${val.vote_average}</div>
             <div>Date: ${val.release_date}</div>`
         ul.appendChild(li);
     });
 
-    // user.map(function(val,i){
-    //     console.log(this);
-    //     let li = document.createElement("li");
-    //     li.innerHTML= `
-    //         <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
-    //         height:410px ;
-    //         width: 345px;"/>
-    //         <h3 style="line-height: 30px;">${val.title}</h3>
-    //         <div id="vote">Vote:${val.vote_count}</div>
-    //         <span><i class="icon-heart-empty" onclick=${addFavourite.call(this,val.id)}></i></span>
-    //         <div>Rating: ${val.vote_average}</div>
-    //         <div>Date: ${val.release_date}</div>`
-    //     ul.appendChild(li);
-    // });
     div.appendChild(ul);
 }
 
@@ -112,7 +98,7 @@ async function searchByName()
             width: 345px;"/>
             <h3 style="line-height: 30px;">${val.title}</h3>
             <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
+            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id},${i})"></i></span>
             <div>Rating: ${val.vote_average}</div>`
         ul.appendChild(li);
     });
@@ -120,19 +106,17 @@ async function searchByName()
   
 }
 
-function addFavourite(id)
+function addFavourite(id,i)
 {
-    // alert("heool")
-    // console.log(this);
-    // this.style.color = "red";
-    
+    // console.log(i);
     let favElement;
     favElement = user.filter(element => {
         return element.id==id;
     });
 
-        let heart = document.querySelector(".icon-heart-empty");
-        heart.style.fill = "red";
+        let heart = document.querySelectorAll(".icon-heart-empty");
+        console.log(heart[i]);
+        heart[i].style.color = "red";
 
     const [A] = favElement; 
         // console.log(A);
@@ -153,11 +137,17 @@ function showfav()
             width: 345px;"/>
             <h3 style="line-height: 30px;">${val.title}</h3>
             <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id})"></i></span>
+            <span><i class="icon-heart-empty" style="color:red;"></i></span>
             <div>Rating: ${val.vote_average}</div>`
         ul.appendChild(li);
     });
     div.appendChild(ul);
+}
+
+function showAll()
+{
+    window.location.reload();
+    myFunction();
 }
 
 function prevButton()
