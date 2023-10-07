@@ -1,3 +1,4 @@
+// {<i class="fa-solid fa-heart fa-beat" style="color: #f61e1e;"></i>}
 let user;
 let favourite=[];
 let div = document.getElementById("movieList");
@@ -8,7 +9,7 @@ let currentPage = document.getElementById("curr");
 
 async function myFunction()
 {
-    currentPage.textContent = `Current Page: ${currpage}`;
+    currentPage.textContent = `Page: ${currpage}`;
     let res = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=f531333d637d0c44abc85b3e74db2186&language=en-US&page=${currpage}`);
     let response = await res.json();
     user = response.results;
@@ -18,14 +19,16 @@ async function myFunction()
         // console.log("Hello : ",i)
         let li = document.createElement("li");
         li.innerHTML= `
-            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
-            height:410px ;
-            width: 345px;"/>
-            <h3 style="line-height: 30px;">${val.title}</h3>
-            <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id},${i})"></i></span>
-            <div>Rating: ${val.vote_average}</div>
-            <div>Date: ${val.release_date}</div>`
+            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" class ="movies_Img"/>
+            <h4 class ="movie_title">${val.title}</h4>
+            <div class="vote">Vote:${val.vote_count}</div>
+            <span>
+
+            <i class="fa-regular fa-heart" onclick="addFavourite(${val.id},${i})"></i>
+            
+            </span>
+            <div class = "rating">Rating: ${val.vote_average}</div>
+            <div class = "date">Date: ${val.release_date}</div>`
         ul.appendChild(li);
     });
     div.appendChild(ul);
@@ -41,14 +44,16 @@ function sortbydate()
       user.map((val,i)=>{
         let li = document.createElement("li");
         li.innerHTML= `
-            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
-            height:410px ;
-            width: 345px;"/>
-            <h3 style="line-height: 30px;">${val.title}</h3>
-            <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id},${i})"></i></span>
-            <div>Rating: ${val.vote_average}</div>
-            <div>Date: ${val.release_date}</div>`
+            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" class ="movies_Img"/>
+            <h4 class ="movie_title">${val.title}</h4>
+            <div class="vote">Vote:${val.vote_count}</div>
+            <span>
+
+            <i class="fa-regular fa-heart" onclick="addFavourite(${val.id},${i})"></i>
+            
+            </span>
+            <div class = "rating">Rating: ${val.vote_average}</div>
+            <div class = "date">Date: ${val.release_date}</div>`
         ul.appendChild(li);
     });
     div.appendChild(ul);
@@ -67,14 +72,16 @@ function sortByrating()
       user.map((val,i)=>{
         let li = document.createElement("li");
         li.innerHTML= `
-            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
-            height:410px ;
-            width: 345px;"/>
-            <h3 style="line-height: 30px;">${val.title}</h3>
-            <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id},${i})"></i></span>
-            <div>Rating: ${val.vote_average}</div>
-            <div>Date: ${val.release_date}</div>`
+            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" class ="movies_Img"/>
+            <h4 class ="movie_title">${val.title}</h4>
+            <div class="vote">Vote:${val.vote_count}</div>
+            <span>
+
+            <i class="fa-regular fa-heart" onclick="addFavourite(${val.id},${i})"></i>
+            
+            </span>
+            <div class = "rating">Rating: ${val.vote_average}</div>
+            <div class = "date">Date: ${val.release_date}</div>`
         ul.appendChild(li);
     });
 
@@ -93,13 +100,16 @@ async function searchByName()
     name.map((val,i)=>{
         let li = document.createElement("li");
         li.innerHTML= `
-            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
-            height:410px ;
-            width: 345px;"/>
-            <h3 style="line-height: 30px;">${val.title}</h3>
-            <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" onclick="addFavourite(${val.id},${i})"></i></span>
-            <div>Rating: ${val.vote_average}</div>`
+            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" class ="movies_Img"/>
+            <h4 class ="movie_title">${val.title}</h4>
+            <div class="vote">Vote:${val.vote_count}</div>
+            <span>
+
+            <i class="fa-regular fa-heart" onclick="addFavourite(${val.id},${i})"></i>
+            
+            </span>
+            <div class = "rating">Rating: ${val.vote_average}</div>
+            <div class = "date">Date: ${val.release_date}</div>`
         ul.appendChild(li);
     });
     div.appendChild(ul);
@@ -108,16 +118,27 @@ async function searchByName()
 
 function addFavourite(id,i)
 {
-    // console.log(i);
+    console.log(i);
     let favElement;
     favElement = user.filter(element => {
         return element.id==id;
     });
 
-        let heart = document.querySelectorAll(".icon-heart-empty");
+        let heart = document.querySelectorAll(".fa-regular");
+        
+        // if (heart[i].classList.contains(".fa-regular")) {
+        //     console.log("t: ");
+        //     heart[i].classList.remove(".fa-regular")
+        //     heart[i].classList.add(".fa-solid");
+        //   }
+        //   else{
+        //     heart[i].classList.remove("fa-solid")
+        //     heart[i].classList.add("fa-regular");
+        //   }
         console.log(heart[i]);
         heart[i].style.color = "red";
-
+        heart[i].style.fill = "red";
+        // <i class="fa-solid fa-heart" style="color: #f61e1e;"></i>
     const [A] = favElement; 
         // console.log(A);
     favourite.push(A);
@@ -132,13 +153,16 @@ function showfav()
     favourite.length && favourite.map((val,i)=>{
         let li = document.createElement("li");
         li.innerHTML= `
-            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" style="object-fit: cover;
-            height:410px ;
-            width: 345px;"/>
-            <h3 style="line-height: 30px;">${val.title}</h3>
-            <div id="vote">Vote:${val.vote_count}</div>
-            <span><i class="icon-heart-empty" style="color:red;"></i></span>
-            <div>Rating: ${val.vote_average}</div>`
+            <img src="${"https://image.tmdb.org/t/p/original/"+val.poster_path}" class ="movies_Img"/>
+            <h4 class ="movie_title">${val.title}</h4>
+            <div class="vote">Vote:${val.vote_count}</div>
+            <span>
+
+            <i class="fa-solid fa-heart fa-beat" style="color: #f61e1e;"></i>
+            
+            </span>
+            <div class = "rating">Rating: ${val.vote_average}</div>
+            <div class = "date">Date: ${val.release_date}</div>`
         ul.appendChild(li);
     });
     div.appendChild(ul);
@@ -153,7 +177,7 @@ function showAll()
 function prevButton()
 {
     currpage--;
-    currentPage.textContent = `Current Page: ${currpage}`;
+    currentPage.textContent = `Page: ${currpage}`;
     div.innerHTML = "";
     myFunction();
     if(currpage==1)
@@ -161,16 +185,22 @@ function prevButton()
         nextPage.disabled=false;
         prevPage.disabled = true;
     }
+
 }
 function nextButton()
 {
     currpage++;
-    currentPage.textContent = `Current Page: ${currpage}`;
+    currentPage.textContent = `Page: ${currpage}`;
     div.innerHTML = "";
     myFunction();
-    if(currpage==3)
+    if(currpage==5)
     {
         nextPage.disabled=true;
+        prevPage.disabled = false;
+    }
+    if(currpage>=2)
+    {
+        // nextPage.disabled=false;
         prevPage.disabled = false;
     }
 }

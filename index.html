@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="style.css">
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body onload="myFunction()">
-    <h1 style="margin-top: 0;"><a href="#" style="color: white;">Movie Deck</a></h1>
+    <h1 style="margin-top: 0;color: rgb(14, 252, 65); text-align: center;">Movie Deck</h1>
     <div id="search">
-        <input type="search" autocomplete="off" placeholder="Search by name..."/>
+        <input type="search" id="inputType" autocomplete="off" placeholder="Search by name..."/>
         <button type="submit" class="search" onclick="searchByName()">Search</button>
     </div>
     <div id="sort">
@@ -25,18 +26,20 @@
     </div>
     <div id="tab">
         <button class="active-tab" onclick="showAll()">All</button>
-        <button class="fav" onclick="showfav()">Favorites</button>
+        <button class="fav" onclick="showfav()">Favorites
+            <i class="fa-solid fa-heart fa-beat" style="margin: 5px;"></i>
+        </button>
     </div>
     <div id="movieList">
-       
+        
     </div> 
     <ul id="pagination">
-        <li><button id="prev" disabled onclick="prevButton()">Previous</button></li>
-        <li><button id="curr" onclick="currButton()">1</button></li>
-        <li><button id="next" onclick="nextButton()">Next</button></li>
+        <li><button id="prev" disabled onclick="prevButton()"><i class="fa-solid fa-arrow-left-long"></i></button></li>
+        <li><span id="curr">1</span></li>
+        <li><button id="next" onclick="nextButton()"><i class="fa-solid fa-arrow-right"></i></button></li>
     </ul>
     <footer>
-        <p>© 2023 Movie Deck</p>
+        <p style="font-size: 18px;">© <span>2023 Developed & Designed by Devipurnima dewangan</span></p>
     </footer>
     <!-- <p onclick="this.style.color='red'">I am Purnima</p> -->
     <script src="App.js"></script>

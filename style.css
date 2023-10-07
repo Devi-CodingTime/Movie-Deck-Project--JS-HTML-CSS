@@ -5,7 +5,8 @@
 }
 h1{
     padding: 20px;
-    background-color: rgb(46, 44, 44);
+    background-color: #2e2c2c;
+    text-shadow: 2px 2px white;
 }
 a{
     text-decoration: none;
@@ -28,6 +29,7 @@ a{
 {
     display: flex;
     margin: 10px 30px 10px 30px;
+    /* background-color: rgb(19, 201, 247); */
     gap: 10px;
 }
 #movieList
@@ -35,15 +37,56 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:center;
+    margin-left: 10%;
 }
 #movieList li{
-    width:24rem;
-    height: 35rem;
+    width:18rem;
+    height: 25rem;
     row-gap: 10px;
     border-radius: 5px;
-    padding: 5px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border: 2px solid black;
+    padding: 10px;
+    -webkit-box-shadow: -1px 0px 8px 1px rgba(31,25,31,1);
+    -moz-box-shadow: -1px 0px 8px 1px rgba(31,25,31,1);
+    box-shadow: -1px 0px 8px 1px rgba(31,25,31,1);
+    align-items:center;
+    border: 2px solid blueviolet;
+}
+.image-container
+{
+    height:44%;            
+    width: 44%;
+    align-items: center;
+}
+#movieList img:hover{
+    transform: scale(1.09);
+}
+.movies_Img
+{
+    /* object-fit: cover; */
+    background-size: cover;
+    height:70%;            
+    width: 100%;
+}
+.movie_title
+{
+    line-height: 20px;
+    word-wrap: break-word;
+    /* white-space: pre; */
+    color: rgb(243, 16, 152);
+}
+.vote
+{
+    display: inline;
+    color: black
+}
+.rating
+{
+    color: rgba(8, 235, 16, 0.957);
+}
+.date
+{
+    color: blue;
 }
 ul
 {
@@ -70,24 +113,41 @@ button
 }
 .active-tab,.search
 {
-    background-color: black;
+    background-color: rgb(8, 65, 235);
+    color: white;
+    width: 5rem;
+    box-shadow: 2px 2px 2px blue 0.5;
+}
+#inputType
+{
+    padding: 7px;
+    border: 2px solid rgb(64, 148, 245);
+    border-radius: 5px;
+    width: 18.65rem;
+    height: 1.5rem;
+    margin-top: 10px;
+    font-size: 20px;
+}
+#sortByrate, #sortBydate
+{
+    background-color: rgb(243, 16, 152);
     color: white;
 }
-input
+#sortByrate:hover, #sortBydate:hover, .fav:hover
 {
-    padding: 5px;
-    border: 2px solid grey;
-    border-radius: 5px;
-    width: 250px;
+    color: rgb(243, 16, 152);
+    background-color: white;
+    border: 2px solid blue;
+}
+.fav
+{
+    background-color: rgb(243, 16, 152);
+    color: white;
 }
 i{
     font-size: 20px;
     float: right;
     margin: 10px;
-}
-#vote
-{
-    display: inline;
 }
 #pagination
 {
@@ -100,4 +160,26 @@ footer
     padding: 10px;
     text-align: center;
     font-size: 16px;
+}
+footer p span{
+   font-size: 18px;
+    color:rgb(243, 16, 152);
+    text-shadow: 1px 1px white;
+}
+#prev, #next
+{
+    height: 2.5rem;
+    color: white;
+    font-style: oblique;
+    border-radius: 30%;
+    background-color: rgb(68, 233, 87);
+}
+#prev i, #next i
+{
+    margin-top: 0;
+}
+#prev i:hover, #next i:hover
+{
+    transform: scale(1.9);
+    color: rgb(243, 16, 152);
 }
