@@ -193,7 +193,7 @@ function nextButton()
     currentPage.textContent = `Page: ${currpage}`;
     div.innerHTML = "";
     myFunction();
-    if(currpage==5)
+    if(currpage==500)
     {
         nextPage.disabled=true;
         prevPage.disabled = false;
