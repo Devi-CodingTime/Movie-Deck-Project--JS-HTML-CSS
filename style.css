@@ -7,6 +7,19 @@ h1{
     padding: 20px;
     background-color: #2e2c2c;
     text-shadow: 2px 2px white;
+    animation: zoomIn 0.3s ease-in forwards;
+    animation-delay: 1s;
+    background-image: url("image/HD-wallpaper-brickwall-black-18-abstract-brick-wall.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+@keyframes zoomIn{
+    0%{
+        font-size: 0px;
+    }
+    100%{
+        font-size: 35px;
+    }
 }
 a{
     text-decoration: none;
@@ -37,7 +50,7 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 10%;
+    align-items: center;
 }
 #movieList li{
     width:18rem;
@@ -116,6 +129,7 @@ button
     background-color: rgb(8, 65, 235);
     color: white;
     width: 5rem;
+    height: 2.7rem;
     box-shadow: 2px 2px 2px blue 0.5;
 }
 #inputType
@@ -143,6 +157,8 @@ button
 {
     background-color: rgb(243, 16, 152);
     color: white;
+    height: 2.7rem;
+    line-height: 23px;
 }
 i{
     font-size: 20px;
